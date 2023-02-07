@@ -12,8 +12,9 @@ import {
   HStack,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import logo from "../logo.png";
-import { HamburgerIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
+import LightThemeIcon from "./icons/LightThemeIcon";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import DarkLightToggle from "./DarkLightToggle";
 
 const Navbar = () => {
   //Checks the width of the screen
@@ -32,8 +33,9 @@ const Navbar = () => {
       w="100%"
       zIndex={2}
       css={{ backdropFilter: "blur(10px)" }}
+      borderBottom="2px"
     >
-      <img src={logo} alt="Logo" width={157} />
+      <LightThemeIcon />
       {isDesktop ? (
         <Flex marginLeft="1rem" justify="space-between" flex="1">
           <Box>
@@ -42,18 +44,18 @@ const Navbar = () => {
           </Box>
 
           <HStack spacing="4">
-            <Button variant="ghost" backgroundColor="#E1ECF4">
+            <Button variant="ghost" backgroundColor="#BBC0C4">
               Login
             </Button>
             <Button variant="ghost" backgroundColor="#0A95FF">
               Sign up
             </Button>
-            <IconButton icon={<MoonIcon />} />
+            <DarkLightToggle />
           </HStack>
         </Flex>
       ) : (
         <Box flex={1} align="right">
-          <IconButton icon={<MoonIcon />} />
+          <DarkLightToggle />
 
           <Box ml={2} display={{ base: "inline-block", md: "none" }}>
             <Menu isLazy id="navbar-menu">
