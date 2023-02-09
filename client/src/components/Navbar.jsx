@@ -7,10 +7,10 @@ import {
   MenuList,
   MenuButton,
   IconButton,
-  useColorModeValue,
   Button,
   HStack,
   useBreakpointValue,
+  Link,
 } from "@chakra-ui/react";
 import LightThemeIcon from "./icons/LightThemeIcon";
 import { HamburgerIcon } from "@chakra-ui/icons";
@@ -39,17 +39,23 @@ const Navbar = () => {
       {isDesktop ? (
         <Flex marginLeft="1rem" justify="space-between" flex="1">
           <Box>
-            <Button variant="ghost">Home</Button>
+            <Link href="/">
+              <Button variant="ghost">Home</Button>
+            </Link>
             <Button variant="ghost">About</Button>
           </Box>
 
           <HStack spacing="4">
-            <Button variant="ghost" backgroundColor="#BBC0C4">
-              Login
-            </Button>
-            <Button variant="ghost" backgroundColor="#0A95FF">
-              Sign up
-            </Button>
+            <Link href="/login">
+              <Button variant="ghost" backgroundColor="#BBC0C4">
+                Login
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button variant="ghost" backgroundColor="#0A95FF">
+                Sign up
+              </Button>
+            </Link>
             <DarkLightToggle />
           </HStack>
         </Flex>
