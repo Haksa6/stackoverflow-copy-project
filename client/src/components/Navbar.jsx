@@ -15,10 +15,15 @@ import {
 import LightThemeIcon from "./icons/LightThemeIcon";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import DarkLightToggle from "./DarkLightToggle";
+import AuthService from "../services/auth.service";
 
 const Navbar = () => {
-  //Checks the width of the screen
-  //md meaning 48em upwards so when the screen is under 48em isDesktop is set to false and the menu icon is shown
+  // Check if the user is logged in and change the navbar accordingly
+  const token = localStorage.getItem("token");
+  console.log(token);
+
+  // Checks the width of the screen
+  // md meaning 48em upwards so when the screen is under 48em isDesktop is set to false and the menu icon is shown
   const isDesktop = useBreakpointValue({ base: false, md: "solid" });
   return (
     <Flex
@@ -42,20 +47,35 @@ const Navbar = () => {
             <Link href="/">
               <Button variant="ghost">Home</Button>
             </Link>
-            <Button variant="ghost">About</Button>
+            <Link href="/">
+              <Button variant="ghost">About</Button>
+            </Link>
           </Box>
 
           <HStack spacing="4">
-            <Link href="/login">
-              <Button variant="ghost" backgroundColor="#BBC0C4">
-                Login
+            {token ? (
+              <Button
+                variant="ghost"
+                backgroundColor="red"
+                onClick={AuthService.logout}
+              >
+                Logout
               </Button>
-            </Link>
-            <Link href="/signup">
-              <Button variant="ghost" backgroundColor="#0A95FF">
-                Sign up
-              </Button>
-            </Link>
+            ) : (
+              <>
+                <Link href="/login">
+                  <Button variant="ghost" backgroundColor="#BBC0C4">
+                    Login
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button variant="ghost" backgroundColor="#0A95FF">
+                    Sign up
+                  </Button>
+                </Link>
+              </>
+            )}
+
             <DarkLightToggle />
           </HStack>
         </Flex>
@@ -72,10 +92,18 @@ const Navbar = () => {
                 aria-label="Options"
               />
               <MenuList>
-                <MenuItem href="/">Home</MenuItem>
-                <MenuItem href="/works">About</MenuItem>
-                <MenuItem href="/login">Login</MenuItem>
-                <MenuItem href="register">Sign up</MenuItem>
+                <MenuItem as="a" href="/">
+                  Home
+                </MenuItem>
+                <MenuItem as="a" href="/about">
+                  About
+                </MenuItem>
+                <MenuItem as="a" href="/login">
+                  Login
+                </MenuItem>
+                <MenuItem as="a" href="/signup">
+                  Sign up
+                </MenuItem>
               </MenuList>
             </Menu>
           </Box>

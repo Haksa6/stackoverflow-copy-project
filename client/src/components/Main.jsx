@@ -1,40 +1,31 @@
-import React from "react";
-import { Flex } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
+import { Flex, Text } from "@chakra-ui/react";
 
 const Main = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/post")
+      .then((response) => response.json())
+      .then((data) => setPosts(data))
+      .catch((error) => console.log(error));
+  }, []);
+  console.log(posts);
   return (
     <Flex w="100%" flexDir="column">
-      <Flex>Blog post 1</Flex>
-      <Flex>Blog post 2</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-
-      <Flex>Blog post 1</Flex>
-      <Flex>Blog post 2</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 1</Flex>
-      <Flex>Blog post 2</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 1</Flex>
-      <Flex>Blog post 2</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 1</Flex>
-      <Flex>Blog post 2</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
-      <Flex>Blog post 3</Flex>
+      {posts.map((post) => (
+        <Flex
+          key={post._id}
+          padding="2.5"
+          background={"#f0e7db"}
+          flexDir="column"
+          marginBottom={"2"}
+          borderRadius="5"
+        >
+          <Text>{post.title}</Text>
+          <Text>Comments: {post.comments.length}</Text>
+        </Flex>
+      ))}
     </Flex>
   );
 };

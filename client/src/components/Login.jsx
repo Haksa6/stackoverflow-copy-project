@@ -1,21 +1,31 @@
 import React, { useState } from "react";
-import {
-  Container,
-  Flex,
-  Button,
-  FormControl,
-  Input,
-  FormLabel,
-} from "@chakra-ui/react";
+import { Flex, Button, FormControl, Input, FormLabel } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import AuthService from "../services/auth.service";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+    try {
+      // Uses the axios login from services folder
+      await AuthService.login(username, password).then(
+        () => {
+          // Goes back to home page after succesful login
+          navigate("/");
+          // Reloads the page
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
@@ -39,10 +49,10 @@ const Login = () => {
               <Input
                 backgroundColor={"white"}
                 color="black"
-                id="email"
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                id="username"
+                type="text"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
                 w="100%"
               />
             </FormControl>
