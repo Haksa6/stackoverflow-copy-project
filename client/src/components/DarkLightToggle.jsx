@@ -7,13 +7,15 @@ const DarkLightToggle = () => {
   const { toggleColorMode } = useColorMode();
 
   return (
-    <AnimatePresence>
+    //wait removes the animation from the removed element
+    <AnimatePresence mode="wait">
       <motion.div
         key={useColorModeValue("light", "dark")}
-        initial={{ y: -20, opacity: 0 }}
+        initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.2 }}
-        style={{ display: "inline-flex" }}
+        exit={{ y: 20, opacity: 0 }}
+        style={{ display: "inline-block" }}
       >
         <IconButton
           onClick={toggleColorMode}

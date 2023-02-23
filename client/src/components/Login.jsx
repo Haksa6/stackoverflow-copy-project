@@ -32,9 +32,11 @@ const Login = () => {
     <Flex flexDir="column" alignSelf="center">
       <Button marginBottom={"2rem"}>Google</Button>
       <Flex
-        padding="24px"
-        w="15rem"
-        h="20rem"
+        justify={"center"}
+        alignItems="center"
+        padding={"24px"}
+        w={{ base: "14rem", sm: "17.5rem" }}
+        h="15rem"
         background="pink"
         borderRadius="5"
         boxShadow="0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px hsla(0,0%,0%,0.05), 0 1px 4px hsla(0,0%,0%,0.05)"
@@ -43,17 +45,19 @@ const Login = () => {
         <form onSubmit={handleSubmit} id="login-form">
           <Flex flexDir="column">
             <FormControl flexDir="column">
-              <FormLabel htmlFor="email" color={"black"}>
-                Email
+              <FormLabel htmlFor="Username" color={"black"}>
+                Username
               </FormLabel>
               <Input
                 backgroundColor={"white"}
                 color="black"
                 id="username"
                 type="text"
+                isRequired
                 value={username}
                 onChange={(event) => setUsername(event.target.value)}
                 w="100%"
+                border={"1px solid"}
               />
             </FormControl>
             <FormControl flexDir="column">
@@ -65,13 +69,15 @@ const Login = () => {
                 color="black"
                 id="password"
                 type="password"
+                isRequired
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 w="100%"
+                border={"1px solid"}
               />
             </FormControl>
-            <Button type="submit" backgroundColor="#0A95FF">
-              Login
+            <Button type="submit" backgroundColor="#0A95FF" marginTop={"1rem"}>
+              Log in
             </Button>
           </Flex>
         </form>

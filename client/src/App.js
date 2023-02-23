@@ -5,6 +5,9 @@ import Main from "./components/Main";
 import { Flex } from "@chakra-ui/react";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import SinglePost from "./components/SinglePost";
+
+import AskQuestion from "./components/AskQuestion";
 function App() {
   return (
     <ChakraProvider>
@@ -23,9 +26,10 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Main />}></Route>
-            <Route path="/about" element={<h1>hi</h1>}></Route>
+            <Route path="/ask" element={<AskQuestion />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/login" element={<Login />}></Route>
+            <Route path="/post/:id" element={<SinglePost />}></Route>
           </Routes>
         </Router>
       </Flex>

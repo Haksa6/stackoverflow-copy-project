@@ -1,30 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { Flex, Text } from "@chakra-ui/react";
+import VoteButtons from "./VoteButtons";
+import { Link } from "react-router-dom";
+import PostService from "../services/post.service";
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    fetch("/api/post")
-      .then((response) => response.json())
-      .then((data) => setPosts(data))
-      .catch((error) => console.log(error));
+    PostService.getAllPosts().then(
+      (response) => {
+        setPosts(response.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }, []);
-  console.log(posts);
   return (
     <Flex w="100%" flexDir="column">
       {posts.map((post) => (
-        <Flex
-          key={post._id}
-          padding="2.5"
-          background={"#f0e7db"}
-          flexDir="column"
-          marginBottom={"2"}
-          borderRadius="5"
-        >
-          <Text>{post.title}</Text>
-          <Text>Comments: {post.comments.length}</Text>
-        </Flex>
+        <Link to={`/post/${post._id}`} key={post._id}>
+          <Flex
+            padding="2.5"
+            border="1px"
+            marginBottom={"2"}
+            borderRadius="5"
+            cursor="pointer"
+            _hover={{ border: "2px" }}
+          >
+            <VoteButtons votes={1} />
+            <Text>{post.title}</Text>
+            <Text>Answers: {post.comments.length}</Text>
+          </Flex>
+        </Link>
       ))}
     </Flex>
   );

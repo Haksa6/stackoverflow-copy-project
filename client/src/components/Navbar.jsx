@@ -11,6 +11,7 @@ import {
   HStack,
   useBreakpointValue,
   Link,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import LightThemeIcon from "./icons/LightThemeIcon";
 import { HamburgerIcon } from "@chakra-ui/icons";
@@ -29,16 +30,16 @@ const Navbar = () => {
     <Flex
       as="nav"
       align="center"
-      padding="1.5rem"
+      padding={{ base: "0.75rem", sm: "1.5rem" }}
       justify="space-between"
       position="fixed"
       left="0"
       right="0"
       top="0"
-      w="100%"
       zIndex={2}
       css={{ backdropFilter: "blur(10px)" }}
-      borderBottom="2px"
+      bg={useColorModeValue("#FEF5EE")}
+      boxShadow="0 1px 2px hsla(0,0%,0%,0.05), 0 1px 4px hsla(0,0%,0%,0.05), 0 2px 8px hsla(0,0%,0%,0.05)"
     >
       <LightThemeIcon />
       {isDesktop ? (
@@ -47,8 +48,10 @@ const Navbar = () => {
             <Link href="/">
               <Button variant="ghost">Home</Button>
             </Link>
-            <Link href="/">
-              <Button variant="ghost">About</Button>
+            <Link href="/ask">
+              <Button variant="ghost" backgroundColor="#0A95FF" color="white">
+                Ask question
+              </Button>
             </Link>
           </Box>
 
@@ -64,12 +67,20 @@ const Navbar = () => {
             ) : (
               <>
                 <Link href="/login">
-                  <Button variant="ghost" backgroundColor="#BBC0C4">
+                  <Button
+                    variant="ghost"
+                    backgroundColor="#BBC0C4"
+                    color="white"
+                  >
                     Login
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button variant="ghost" backgroundColor="#0A95FF">
+                  <Button
+                    variant="ghost"
+                    backgroundColor="#0A95FF"
+                    color="white"
+                  >
                     Sign up
                   </Button>
                 </Link>
@@ -95,8 +106,8 @@ const Navbar = () => {
                 <MenuItem as="a" href="/">
                   Home
                 </MenuItem>
-                <MenuItem as="a" href="/about">
-                  About
+                <MenuItem as="a" href="/ask">
+                  Ask question
                 </MenuItem>
                 <MenuItem as="a" href="/login">
                   Login

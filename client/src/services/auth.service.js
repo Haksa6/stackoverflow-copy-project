@@ -8,8 +8,7 @@ const register = (username, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.username) {
-        console.log(response.data.username);
+      if (response.data) {
         // Set user in localstorage if the register was succesful
         localStorage.setItem("token", JSON.stringify(response.data));
       }
