@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Text, Box } from "@chakra-ui/react";
 import VoteButtons from "./VoteButtons";
 import { Link } from "react-router-dom";
 import PostService from "../services/post.service";
@@ -20,20 +20,38 @@ const Main = () => {
   return (
     <Flex w="100%" flexDir="column">
       {posts.map((post) => (
-        <Link to={`/post/${post._id}`} key={post._id}>
-          <Flex
-            padding="2.5"
-            border="1px"
-            marginBottom={"2"}
-            borderRadius="5"
-            cursor="pointer"
-            _hover={{ border: "2px" }}
-          >
-            <VoteButtons votes={1} />
-            <Text>{post.title}</Text>
+        <Flex
+          padding="2"
+          border="1px"
+          key={post._id}
+          marginBottom={"2"}
+          borderRadius="5"
+          cursor="pointer"
+          wordBreak="break-word"
+        >
+          <VoteButtons votes={1} />
+
+          <Flex flexDir={"column"} justify="space-between" id="post-content">
+            <Box>
+              <Link to={`/post/${post._id}`}>
+                <Text
+                  fontSize={"xl"}
+                  color={"#0074CC"}
+                  _hover={{
+                    color: "hsl(206deg 100% 52%)",
+                  }}
+                >
+                  {post.title}
+                </Text>
+              </Link>
+              <Text fontSize={"sm"}>
+                {post.codeSnippet}
+                dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              </Text>
+            </Box>
             <Text>Answers: {post.comments.length}</Text>
           </Flex>
-        </Link>
+        </Flex>
       ))}
     </Flex>
   );
