@@ -2,10 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
-router.get("/", (req, res) => {
-  res.send("Hi");
-});
+const auth = require("../middleware/auth");
 
 router.post("/register", async (req, res) => {
   try {
@@ -20,6 +17,7 @@ router.post("/register", async (req, res) => {
       username,
       password,
     });
+    console.log(user._id);
     // Create jwt token
     const token = jwt.sign({ id: user._id, username }, process.env.JWT_SECRET, {
       expiresIn: "2h",
@@ -47,6 +45,16 @@ router.post("/login", async (req, res) => {
       );
       res.status(200).json(token);
     }
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+router.get("/current", auth, async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.user.username });
+    if (!user) res.status(400).send("Invalid token");
+    res.json(user);
   } catch (err) {
     console.error(err.message);
   }

@@ -28,7 +28,7 @@ const SinglePost = () => {
 
   const click = () => {
     console.log(post);
-    console.log(id);
+    console.log(JSON.parse(localStorage.getItem("token")));
   };
 
   // Changes the post's date to finnish format

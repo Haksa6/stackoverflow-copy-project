@@ -4,9 +4,14 @@ const postSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   title: { type: String, required: true },
   codeSnippet: { type: String },
-  upvotes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  votes: [
+    {
+      user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      value: { type: Number, default: 0 },
+    },
+  ],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
-  lastEdited: { type: Date, default: Date.now() },
+  created: { type: Date, default: Date.now() },
 });
 
 module.exports = mongoose.model("Post", postSchema);

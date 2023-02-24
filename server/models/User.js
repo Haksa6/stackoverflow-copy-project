@@ -12,8 +12,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  upvotedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
-  upvotedComments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  votedPosts: [{ type: mongoose.Schema.Types.ObjectId, ref: "Post" }],
+  votedComments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 //Hash password before being saved to database
 userSchema.pre("save", function (next) {
