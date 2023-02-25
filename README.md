@@ -14,6 +14,9 @@
 
 ## Features
 
-| Features       | Max points |
-| -------------- | :--------: |
-| Basic features |     25     |
+| Features                                     | Max points |
+| -------------------------------------------- | :--------: |
+| Basic features                               |     25     |
+| Utilization of a frontside framework (React) |     5      |
+| Own feature (Light/ Dark theme)              |     5      |
+| **Total score**                              |     35     |
