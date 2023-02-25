@@ -11,3 +11,9 @@
 ## Installation
 
 ## User manual
+
+## Features
+
+| Features       | Max points |
+| -------------- | :--------: |
+| Basic features |     25     |
