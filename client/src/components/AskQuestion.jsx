@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Flex, Text, Heading, Input, Textarea, Button } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import PostService from "../services/post.service";
 
-const AskQuestion = () => {
+const AskQuestion = ({ currentUser }) => {
+  const [title, setTitle] = useState("");
+  const [codeSnippet, setCodeSnippet] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await PostService.addPost(currentUser._id, title, codeSnippet).then(
+        () => {
+          // Goes back to home page after succesful post
+          navigate("/");
+          // Reloads the page
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <Flex w="100%" flexDir={"column"}>
       <Heading>Ask a public question</Heading>
@@ -21,6 +47,8 @@ const AskQuestion = () => {
           </Text>
           <Input
             size="sm"
+            isRequired
+            onChange={(event) => setTitle(event.target.value)}
             placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
           />
         </Flex>
@@ -39,10 +67,15 @@ const AskQuestion = () => {
           <Text fontSize={"sm"}>
             Post your code and more details about your problem, if needed.
           </Text>
-          <Textarea size="sm" />
+          <Textarea
+            onChange={(event) => setCodeSnippet(event.target.value)}
+            size="sm"
+          />
         </Flex>
       </Flex>
-      <Button marginTop="1rem">Submit</Button>
+      <Button onClick={handleSubmit} marginTop="1rem">
+        Submit
+      </Button>
     </Flex>
   );
 };

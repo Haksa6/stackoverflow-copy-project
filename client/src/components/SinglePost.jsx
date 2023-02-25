@@ -14,7 +14,7 @@ import axios from "axios";
 import VoteButtons from "./VoteButtons";
 
 const SinglePost = () => {
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState([null]);
   // useParams() gets the current posts id from the url
   const { id } = useParams();
 
@@ -28,12 +28,11 @@ const SinglePost = () => {
 
   const click = () => {
     console.log(post);
-    console.log(JSON.parse(localStorage.getItem("token")));
   };
 
   // Changes the post's date to finnish format
-  const lastEditedDate = new Date(post?.lastEdited);
-  const formattedDate = lastEditedDate.toLocaleString("en-FI", {
+  const date = new Date(post?.created);
+  const formattedDate = date.toLocaleString("en-FI", {
     dateStyle: "short",
   });
 
@@ -51,9 +50,9 @@ const SinglePost = () => {
         </Flex>
         <HStack fontSize="sm" spacing={9} marginBottom="2">
           <Text>
-            Modified: <Text as="time">{formattedDate}</Text>
+            Created: <Text as="time">{formattedDate}</Text>
           </Text>
-          <Text>Posted by: {post?.user} ABC</Text>
+          <Text>Posted by: {post?.user?.username}</Text>
         </HStack>
       </Flex>
       <Grid
@@ -96,13 +95,12 @@ const SinglePost = () => {
           Submit
         </Button>
       </Flex>
-
-      {post?.comments.length === 0 && (
-        <Flex marginTop={"4"}>
-          <Heading fontSize={"xl"}>Comments</Heading>{" "}
-        </Flex>
-      )}
     </Flex>
+    // {post?.comments.length === 0 && (
+    //   <Flex marginTop={"4"}>
+    //     <Heading fontSize={"xl"}>Comments</Heading>{" "}
+    //   </Flex>
+    // )}
   );
 };
 

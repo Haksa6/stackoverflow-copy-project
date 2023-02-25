@@ -18,11 +18,9 @@ import { HamburgerIcon } from "@chakra-ui/icons";
 import DarkLightToggle from "./DarkLightToggle";
 import AuthService from "../services/auth.service";
 
-const Navbar = () => {
+const Navbar = ({ currentUser }) => {
   // Check if the user is logged in and change the navbar accordingly
-  const token = localStorage.getItem("token");
-  console.log(token);
-
+  // console.log(currentUser);
   // Checks the width of the screen
   // md meaning 48em upwards so when the screen is under 48em isDesktop is set to false and the menu icon is shown
   const isDesktop = useBreakpointValue({ base: false, md: "solid" });
@@ -56,7 +54,7 @@ const Navbar = () => {
           </Box>
 
           <HStack spacing="4">
-            {token ? (
+            {currentUser ? (
               <Button
                 variant="ghost"
                 backgroundColor="red"

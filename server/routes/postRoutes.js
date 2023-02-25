@@ -31,7 +31,9 @@ router.post("/add", auth, async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     // Adds the comments as well so there's no need to do separate call
-    const post = await Post.findById(req.params.id).populate("comments");
+    const post = await Post.findById(req.params.id)
+      .populate("comments")
+      .populate("user");
     if (!post) return res.status(404).json({ msg: "Post not found" });
 
     res.status(201).json(post);

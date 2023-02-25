@@ -26,7 +26,6 @@ const Main = () => {
           key={post._id}
           marginBottom={"2"}
           borderRadius="5"
-          cursor="pointer"
           wordBreak="break-word"
         >
           <VoteButtons votes={1} />
@@ -35,6 +34,7 @@ const Main = () => {
             <Box>
               <Link to={`/post/${post._id}`}>
                 <Text
+                  cursor="pointer"
                   fontSize={"xl"}
                   color={"#0074CC"}
                   _hover={{
@@ -44,10 +44,7 @@ const Main = () => {
                   {post.title}
                 </Text>
               </Link>
-              <Text fontSize={"sm"}>
-                {post.codeSnippet}
-                dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-              </Text>
+              <Text fontSize={"sm"}>{post.codeSnippet}</Text>
             </Box>
             <Text>Answers: {post.comments.length}</Text>
           </Flex>

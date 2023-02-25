@@ -6,9 +6,26 @@ import { Flex } from "@chakra-ui/react";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import SinglePost from "./components/SinglePost";
-
 import AskQuestion from "./components/AskQuestion";
+import { useState, useEffect } from "react";
+import AuthService from "./services/auth.service";
+
 function App() {
+  // Get the current user information
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+  // Get the current user
+  useEffect(() => {
+    AuthService.getCurrentUser().then(
+      (value) => {
+        setCurrentUser(value);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, []);
+
   return (
     <ChakraProvider>
       <Flex
@@ -23,10 +40,13 @@ function App() {
         justifyContent="center"
       >
         <Router>
-          <Navbar />
+          <Navbar currentUser={currentUser} />
           <Routes>
             <Route path="/" element={<Main />}></Route>
-            <Route path="/ask" element={<AskQuestion />}></Route>
+            <Route
+              path="/ask"
+              element={<AskQuestion currentUser={currentUser} />}
+            ></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/post/:id" element={<SinglePost />}></Route>

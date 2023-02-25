@@ -42,10 +42,23 @@ const logout = () => {
   window.location.reload();
 };
 
+const getCurrentUser = () => {
+  const token = JSON.parse(localStorage.getItem("token"));
+  return axios
+    .get("/api/user/current", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
 const AuthService = {
   register,
   login,
   logout,
+  getCurrentUser,
 };
 
 export default AuthService;
