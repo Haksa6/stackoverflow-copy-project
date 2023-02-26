@@ -38,6 +38,7 @@ function App() {
         paddingInlineEnd="1.5rem"
         paddingTop="28"
         justifyContent="center"
+        wordBreak={"break-word"}
       >
         <Router>
           <Navbar currentUser={currentUser} />
@@ -49,7 +50,10 @@ function App() {
             ></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/login" element={<Login />}></Route>
-            <Route path="/post/:id" element={<SinglePost />}></Route>
+            <Route
+              path="/post/:id"
+              element={<SinglePost currentUser={currentUser} />}
+            ></Route>
           </Routes>
         </Router>
       </Flex>

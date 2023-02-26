@@ -26,7 +26,6 @@ const Main = () => {
           key={post._id}
           marginBottom={"2"}
           borderRadius="5"
-          wordBreak="break-word"
         >
           <VoteButtons votes={1} />
 

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Post = require("../models/Post");
 const auth = require("../middleware/auth");
 const Comment = require("../models/Comment");
+const User = require("../models/User");
 
 // GET request to get all the posts
 router.get("/", async (req, res) => {
@@ -17,7 +18,7 @@ router.get("/", async (req, res) => {
 router.post("/add", auth, async (req, res) => {
   try {
     const post = await Post.create({
-      user: req.user.id,
+      user: req.user._id,
       title: req.body.title,
       codeSnippet: req.body.codeSnippet,
     });
@@ -48,18 +49,56 @@ router.post("/:id/comment", auth, async (req, res) => {
     if (!post) return res.status(404).json({ msg: "Post not found" });
 
     const comment = await Comment.create({
-      user: req.user.id,
+      user: req.user.username,
       post: req.params.id,
       text: req.body.text,
     });
 
-    console.log(comment);
+    console.log(post.comments);
     // Add the new comment to the post
     post.comments.push(comment);
     await post.save();
     res.status(201).json(comment);
   } catch (err) {
     onsole.error(err.message);
+  }
+});
+
+router.put("/:id/vote", auth, async (req, res) => {
+  const voteValue = req.body.voteValue;
+
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).json({ msg: "Post not found" });
+
+    // console.log(existingVote);
+
+    // Check if the user has already voted on this post
+    const existingVote = post.votes.find(
+      (vote) => vote.user && vote.user.equals(req.user._id)
+    );
+    if (existingVote) {
+      // User has already voted, update their vote
+      if (existingVote.value === voteValue) {
+        // User is trying to vote the same as before, change the vote value to 0
+        existingVote.value = 0;
+        await post.save();
+        console.log(post.votes);
+        return res.json(post);
+      } else {
+        // User is changing their vote value
+        existingVote.value = voteValue;
+      }
+    } else {
+      // User hasn't voted, add a new vote
+      post.votes.push({ user: req.user._id, value: voteValue });
+    }
+    // post.votes += voteValue;
+    console.log(post.votes);
+    await post.save();
+    return res.json(post);
+  } catch (err) {
+    console.error(err);
   }
 });
 

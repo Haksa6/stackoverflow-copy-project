@@ -19,9 +19,13 @@ router.post("/register", async (req, res) => {
     });
     console.log(user._id);
     // Create jwt token
-    const token = jwt.sign({ id: user._id, username }, process.env.JWT_SECRET, {
-      expiresIn: "2h",
-    });
+    const token = jwt.sign(
+      { _id: user._id, username: username, votedPosts: [], votedComments: [] },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "2h",
+      }
+    );
     res.status(200).json(token);
   } catch (err) {
     console.error(err.message);
@@ -37,7 +41,12 @@ router.post("/login", async (req, res) => {
     if (await bcrypt.compare(password, user.password)) {
       // Create token
       const token = jwt.sign(
-        { id: user._id, username },
+        {
+          _id: user._id,
+          username: username,
+          votedPosts: [],
+          votedComments: [],
+        },
         process.env.JWT_SECRET,
         {
           expiresIn: "2h",

@@ -73,7 +73,12 @@ const AskQuestion = ({ currentUser }) => {
           />
         </Flex>
       </Flex>
-      <Button onClick={handleSubmit} marginTop="1rem">
+      <Button
+        alignSelf={"flex-start"}
+        backgroundColor="#0A95FF"
+        onClick={handleSubmit}
+        marginTop="1rem"
+      >
         Submit
       </Button>
     </Flex>

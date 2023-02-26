@@ -42,6 +42,7 @@ const logout = () => {
   window.location.reload();
 };
 
+// Get the current user function
 const getCurrentUser = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   return axios
