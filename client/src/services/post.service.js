@@ -48,10 +48,49 @@ const addComment = (username, postID, text) => {
     });
 };
 
+const addVote = (postID, value) => {
+  return axios
+    .put(
+      `http://localhost:3000/api/post/${postID}/vote`,
+      {
+        voteValue: value,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    .then((response) => {
+      return response.data;
+    });
+};
+
+const addVoteComment = (commentId, value) => {
+  return axios
+    .put(
+      "http://localhost:3000/api/post/commentvote",
+      {
+        voteValue: value,
+        commentId: commentId,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const PostService = {
   getAllPosts,
   addPost,
   addComment,
+  addVote,
+  addVoteComment,
 };
 
 export default PostService;

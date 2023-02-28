@@ -9,6 +9,8 @@ import SinglePost from "./components/SinglePost";
 import AskQuestion from "./components/AskQuestion";
 import { useState, useEffect } from "react";
 import AuthService from "./services/auth.service";
+import NotFound from "./components/NotFound";
+import { CurrentUserProvider } from "./CurrentUserContext";
 
 function App() {
   // Get the current user information
@@ -27,37 +29,40 @@ function App() {
   }, []);
 
   return (
-    <ChakraProvider>
-      <Flex
-        as="main"
-        w="100%"
-        minH="100vh"
-        marginInlineStart="auto"
-        marginInlineEnd="auto"
-        paddingInlineStart="1.5rem"
-        paddingInlineEnd="1.5rem"
-        paddingTop="28"
-        justifyContent="center"
-        wordBreak={"break-word"}
-      >
-        <Router>
-          <Navbar currentUser={currentUser} />
-          <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route
-              path="/ask"
-              element={<AskQuestion currentUser={currentUser} />}
-            ></Route>
-            <Route path="/signup" element={<Signup />}></Route>
-            <Route path="/login" element={<Login />}></Route>
-            <Route
-              path="/post/:id"
-              element={<SinglePost currentUser={currentUser} />}
-            ></Route>
-          </Routes>
-        </Router>
-      </Flex>
-    </ChakraProvider>
+    <CurrentUserProvider>
+      <ChakraProvider>
+        <Flex
+          as="main"
+          w="100%"
+          minH="100vh"
+          marginInlineStart="auto"
+          marginInlineEnd="auto"
+          paddingInlineStart="1.5rem"
+          paddingInlineEnd="1.5rem"
+          paddingTop="28"
+          justifyContent="center"
+          wordBreak={"break-word"}
+        >
+          <Router>
+            <Navbar currentUser={currentUser} />
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route
+                path="/ask"
+                element={<AskQuestion currentUser={currentUser} />}
+              />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+              <Route
+                path="/post/:id"
+                element={<SinglePost currentUser={currentUser} />}
+              />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
+        </Flex>
+      </ChakraProvider>
+    </CurrentUserProvider>
   );
 }
 

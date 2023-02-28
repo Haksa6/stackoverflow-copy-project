@@ -27,7 +27,7 @@ const Main = () => {
           marginBottom={"2"}
           borderRadius="5"
         >
-          <VoteButtons votes={1} />
+          <VoteButtons isComment={false} post={post} />
 
           <Flex flexDir={"column"} justify="space-between" id="post-content">
             <Box>

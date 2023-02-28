@@ -78,7 +78,7 @@ const SinglePost = ({ currentUser }) => {
         borderBottom="7px solid #DAE0E6"
       >
         <GridItem>
-          <VoteButtons />
+          {post?.votes && <VoteButtons isComment={false} post={post} />}
         </GridItem>
         <GridItem>
           <Text marginBottom={"4"}>{post?.codeSnippet}</Text>
@@ -116,7 +116,7 @@ const SinglePost = ({ currentUser }) => {
               borderBottom="1px solid"
             >
               <GridItem>
-                <VoteButtons />
+                <VoteButtons isComment={true} post={post} comment={comment} />
               </GridItem>
               <GridItem>
                 <Text>Commented by: {comment.user}</Text>

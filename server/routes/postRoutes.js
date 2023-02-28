@@ -71,8 +71,6 @@ router.put("/:id/vote", auth, async (req, res) => {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ msg: "Post not found" });
 
-    // console.log(existingVote);
-
     // Check if the user has already voted on this post
     const existingVote = post.votes.find(
       (vote) => vote.user && vote.user.equals(req.user._id)
@@ -82,6 +80,7 @@ router.put("/:id/vote", auth, async (req, res) => {
       if (existingVote.value === voteValue) {
         // User is trying to vote the same as before, change the vote value to 0
         existingVote.value = 0;
+
         await post.save();
         console.log(post.votes);
         return res.json(post);
@@ -93,10 +92,51 @@ router.put("/:id/vote", auth, async (req, res) => {
       // User hasn't voted, add a new vote
       post.votes.push({ user: req.user._id, value: voteValue });
     }
-    // post.votes += voteValue;
+
     console.log(post.votes);
+
     await post.save();
     return res.json(post);
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+//Voting route for the comments
+router.put("/commentvote", auth, async (req, res) => {
+  const voteValue = req.body.voteValue;
+  const commentId = req.body.commentId;
+
+  try {
+    const comment = await Comment.findById(commentId);
+    if (!comment) return res.status(404).json({ msg: "Comment not found" });
+
+    // Check if the user has already voted on this post
+
+    const existingVote = comment.votes.find(
+      (vote) => vote.user && vote.user.equals(req.user._id)
+    );
+    if (existingVote) {
+      // User has already voted, update their vote
+      if (existingVote.value === voteValue) {
+        // User is trying to vote the same as before, change the vote value to 0
+        existingVote.value = 0;
+        await comment.save();
+
+        console.log(comment.votes);
+        return res.json(comment);
+      } else {
+        // User is changing their vote value
+        existingVote.value = voteValue;
+      }
+    } else {
+      // User hasn't voted, add a new vote
+      comment.votes.push({ user: req.user._id, value: voteValue });
+    }
+
+    console.log(comment.votes);
+    await comment.save();
+    return res.json(comment);
   } catch (err) {
     console.error(err);
   }
