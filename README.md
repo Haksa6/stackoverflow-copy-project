@@ -16,11 +16,21 @@
 git clone https://github.com/Haksa6/stackoverflow-copy-project.git
 ```
 
-2. cd into to the project and npm install
+2. Cd into to the stackoverflow-copy-project and run npm install
 
 ```
 npm install
 ```
+
+3. Create a new file called .env in the server folder. Add three new values as such:
+
+```
+MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/<database-name>?retryWrites=true&w=majority
+PORT=5000
+JWT_SECRET=SECRET
+```
+
+Replace <username> and <password> with your MongoDB Atlas username and password. Replace <cluster-name> with the name of your cluster. Replace <database-name> with the name of your database.
 
 ## User manual
 
