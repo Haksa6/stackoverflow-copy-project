@@ -10,13 +10,13 @@
 
 ## Installation
 
-1.
+1. Git clone the to an empty folder
 
 ```
 git clone https://github.com/Haksa6/stackoverflow-copy-project.git
 ```
 
-2.
+2. cd into to the project and npm install
 
 ```
 npm install
