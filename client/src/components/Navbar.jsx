@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Flex,
@@ -17,10 +17,11 @@ import LightThemeIcon from "./icons/LightThemeIcon";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import DarkLightToggle from "./DarkLightToggle";
 import AuthService from "../services/auth.service";
+import { CurrentUserContext } from "../CurrentUserContext";
 
-const Navbar = ({ currentUser }) => {
-  // Check if the user is logged in and change the navbar accordingly
-  // console.log(currentUser);
+const Navbar = () => {
+  // Get the user and check if the user is logged in and change the navbar accordingly
+  const currentUser = useContext(CurrentUserContext);
   // Checks the width of the screen
   // md meaning 48em upwards so when the screen is under 48em isDesktop is set to false and the menu icon is shown
   const isDesktop = useBreakpointValue({ base: false, md: "solid" });

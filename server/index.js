@@ -11,6 +11,7 @@ const postRoutes = require("./routes/postRoutes");
 app.use(cors());
 app.use(express.json());
 
+// Connect to mongoose
 mongoose.set("strictQuery", false);
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -23,6 +24,7 @@ mongoose
     console.log("error connection to MongoDB", error.message);
   });
 
+// Set up the routes
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 

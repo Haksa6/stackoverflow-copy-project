@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import {
   Flex,
@@ -14,13 +14,19 @@ import {
 import axios from "axios";
 import VoteButtons from "./VoteButtons";
 import PostService from "../services/post.service";
+import { CurrentUserContext } from "../CurrentUserContext";
 
-const SinglePost = ({ currentUser }) => {
+const SinglePost = () => {
   const [post, setPost] = useState(null);
   const [text, setText] = useState("");
+
+  // Current user from context
+  const currentUser = useContext(CurrentUserContext);
+
   // useParams() gets the current posts id from the url
   const { id } = useParams();
 
+  // Fetch the post data when the post is loaded
   useEffect(() => {
     const fetchPost = async () => {
       const { data } = await axios.get(`/api/post/${id}`);
@@ -29,11 +35,12 @@ const SinglePost = ({ currentUser }) => {
     fetchPost();
   }, [id]);
 
-  const click = () => {
-    console.log(post);
-  };
-
+  // Handle the submittion of the comment
   const handleSubmit = async (event) => {
+    if (!currentUser) {
+      alert("Please login to comment");
+      return;
+    }
     event.preventDefault();
 
     try {
@@ -62,7 +69,6 @@ const SinglePost = ({ currentUser }) => {
       <Flex flexDir={"column"} borderBottom="1px solid grey">
         <Flex alignItems={"center"} justify="space-between" flexWrap={"wrap"}>
           <Heading>{post?.title}</Heading>
-          <Button onClick={click}></Button>
         </Flex>
         <HStack fontSize="sm" spacing={9} marginBottom="2">
           <Text>
@@ -84,7 +90,7 @@ const SinglePost = ({ currentUser }) => {
           <Text marginBottom={"4"}>{post?.codeSnippet}</Text>
         </GridItem>
       </Grid>
-      <Flex marginTop={"4"} flexDir="column" borderBottom="7px solid #DAE0E6">
+      <Flex marginTop={"4"} flexDir="column">
         <Text>Write a comment</Text>
         <Textarea
           minH={"150px"}
@@ -111,7 +117,7 @@ const SinglePost = ({ currentUser }) => {
           {post?.comments.map((comment) => (
             <Grid
               templateColumns="max-content 1fr"
-              marginTop="4"
+              marginY="4"
               key={comment._id}
               borderBottom="1px solid"
             >
@@ -120,10 +126,7 @@ const SinglePost = ({ currentUser }) => {
               </GridItem>
               <GridItem>
                 <Text>Commented by: {comment.user}</Text>
-                <Text>
-                  {comment.text}
-                  borderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottomborderBottom
-                </Text>
+                <Text>{comment.text}</Text>
               </GridItem>
             </Grid>
           ))}

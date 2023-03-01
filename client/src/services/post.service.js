@@ -48,6 +48,7 @@ const addComment = (username, postID, text) => {
     });
 };
 
+// Add a vote on a post
 const addVote = (postID, value) => {
   return axios
     .put(
@@ -66,6 +67,7 @@ const addVote = (postID, value) => {
     });
 };
 
+// Add a vote on a comment
 const addVoteComment = (commentId, value) => {
   return axios
     .put(

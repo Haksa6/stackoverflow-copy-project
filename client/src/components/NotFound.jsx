@@ -2,6 +2,7 @@ import React from "react";
 import { VStack, Text } from "@chakra-ui/react";
 
 const NotFound = () => {
+  // If the user goes to unspecified page this component will be shown aka 404
   return (
     <VStack textAlign={"center"}>
       <Text as="h4" fontSize={"3xl"}>

@@ -3,6 +3,7 @@ import { useColorMode, IconButton, useColorModeValue } from "@chakra-ui/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SunIcon, MoonIcon } from "@chakra-ui/icons";
 
+// The button showed on the navbar to change theme.
 const DarkLightToggle = () => {
   const { toggleColorMode } = useColorMode();
 

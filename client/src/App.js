@@ -7,27 +7,10 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import SinglePost from "./components/SinglePost";
 import AskQuestion from "./components/AskQuestion";
-import { useState, useEffect } from "react";
-import AuthService from "./services/auth.service";
 import NotFound from "./components/NotFound";
 import { CurrentUserProvider } from "./CurrentUserContext";
 
 function App() {
-  // Get the current user information
-  const [currentUser, setCurrentUser] = useState(undefined);
-
-  // Get the current user
-  useEffect(() => {
-    AuthService.getCurrentUser().then(
-      (value) => {
-        setCurrentUser(value);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  }, []);
-
   return (
     <CurrentUserProvider>
       <ChakraProvider>
@@ -44,19 +27,13 @@ function App() {
           wordBreak={"break-word"}
         >
           <Router>
-            <Navbar currentUser={currentUser} />
+            <Navbar />
             <Routes>
               <Route path="/" element={<Main />} />
-              <Route
-                path="/ask"
-                element={<AskQuestion currentUser={currentUser} />}
-              />
+              <Route path="/ask" element={<AskQuestion />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
-              <Route
-                path="/post/:id"
-                element={<SinglePost currentUser={currentUser} />}
-              />
+              <Route path="/post/:id" element={<SinglePost />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Router>

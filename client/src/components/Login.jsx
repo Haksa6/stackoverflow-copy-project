@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { Flex, Button, FormControl, Input, FormLabel } from "@chakra-ui/react";
+import {
+  Flex,
+  Button,
+  FormControl,
+  Input,
+  FormLabel,
+  useColorModeValue,
+  Heading,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
 const Login = () => {
+  // Set the values
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  // useNavigate to go back to re-route
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -17,7 +27,6 @@ const Login = () => {
           // Goes back to home page after succesful login
           navigate("/");
           // Reloads the page
-          window.location.reload();
         },
         (error) => {
           console.log(error);
@@ -30,14 +39,15 @@ const Login = () => {
 
   return (
     <Flex flexDir="column" alignSelf="center">
-      <Button marginBottom={"2rem"}>Google</Button>
+      <Heading w="100%">Login</Heading>
+
       <Flex
         justify={"center"}
         alignItems="center"
         padding={"24px"}
         w={{ base: "14rem", sm: "17.5rem" }}
         h="15rem"
-        background="pink"
+        bg={useColorModeValue("hsl(35, 87%, 94%)", "grey")}
         borderRadius="5"
         boxShadow="0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px hsla(0,0%,0%,0.05), 0 1px 4px hsla(0,0%,0%,0.05)"
         id="form-container"
@@ -45,9 +55,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} id="login-form">
           <Flex flexDir="column">
             <FormControl flexDir="column">
-              <FormLabel htmlFor="Username" color={"black"}>
-                Username
-              </FormLabel>
+              <FormLabel htmlFor="Username">Username</FormLabel>
               <Input
                 backgroundColor={"white"}
                 color="black"
@@ -61,9 +69,7 @@ const Login = () => {
               />
             </FormControl>
             <FormControl flexDir="column">
-              <FormLabel htmlFor="password" color={"black"}>
-                Password
-              </FormLabel>
+              <FormLabel htmlFor="password">Password</FormLabel>
               <Input
                 backgroundColor={"white"}
                 color="black"

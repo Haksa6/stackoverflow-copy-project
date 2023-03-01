@@ -59,6 +59,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//Get the current user
 router.get("/current", auth, async (req, res) => {
   try {
     const user = await User.findOne({ username: req.user.username });

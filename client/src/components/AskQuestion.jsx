@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Flex, Text, Heading, Input, Textarea, Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import PostService from "../services/post.service";
+import { CurrentUserContext } from "../CurrentUserContext";
 
-const AskQuestion = ({ currentUser }) => {
+const AskQuestion = () => {
   const [title, setTitle] = useState("");
   const [codeSnippet, setCodeSnippet] = useState("");
   const navigate = useNavigate();
+  // Get the current user from context
+  const currentUser = useContext(CurrentUserContext);
 
   const handleSubmit = async (event) => {
+    // If the user isn't logged in show error message
+    if (!currentUser) {
+      alert("Please login to add a post.");
+      return;
+    }
     event.preventDefault();
 
     try {

@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Flex, Button, FormControl, Input, FormLabel } from "@chakra-ui/react";
+import {
+  Flex,
+  Button,
+  FormControl,
+  Input,
+  FormLabel,
+  useColorModeValue,
+  Heading,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
 
@@ -30,14 +38,15 @@ const Signup = () => {
 
   return (
     <Flex flexDir="column" alignSelf="center">
-      <Button marginBottom={"2rem"}>Google</Button>
+      <Heading w="100%">Sign up</Heading>
+
       <Flex
         justify={"center"}
         alignItems="center"
         padding={"24px"}
         w={{ base: "14rem", sm: "17.5rem" }}
         h="15rem"
-        background="pink"
+        bg={useColorModeValue("hsl(35, 87%, 94%)", "grey")}
         borderRadius="5"
         boxShadow="0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px hsla(0,0%,0%,0.05), 0 1px 4px hsla(0,0%,0%,0.05)"
         id="form-container"
