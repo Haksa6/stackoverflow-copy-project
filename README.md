@@ -30,7 +30,7 @@ PORT=5000
 JWT_SECRET=SECRET
 ```
 
-Replace <username> and <password> with your MongoDB Atlas username and password. Replace <cluster-name> with the name of your cluster. Replace <database-name> with the name of your database.
+Replace "username" and "password" with your MongoDB Atlas username and password. Replace "cluster-name" with the name of your cluster. Replace "database-name" with the name of your database.
 
 ## User manual
 
