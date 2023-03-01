@@ -27,6 +27,7 @@ const Login = () => {
           // Goes back to home page after succesful login
           navigate("/");
           // Reloads the page
+          window.location.reload();
         },
         (error) => {
           console.log(error);

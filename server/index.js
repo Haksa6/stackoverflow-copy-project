@@ -11,18 +11,23 @@ const postRoutes = require("./routes/postRoutes");
 app.use(cors());
 app.use(express.json());
 
-// Connect to mongoose
+// Connect to mongodb
+const mongoDb = "mongodb://localhost:27017/postdb";
+// Connect to mongodb
 mongoose.set("strictQuery", false);
 mongoose
-  .connect(process.env.MONGODB_URI, {
+  .connect(mongoDb, {
     useNewUrlParser: true,
   })
   .then(() => {
-    console.log("connected to MongoDB Atlas");
+    console.log("connected to MongoDB");
   })
   .catch((error) => {
     console.log("error connection to MongoDB", error.message);
   });
+mongoose.Promise = Promise;
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "MongoDB connection error"));
 
 // Set up the routes
 app.use("/api/user", userRoutes);
