@@ -54,9 +54,7 @@ const Signup = () => {
         <form onSubmit={handleSubmit} id="signup-form">
           <Flex flexDir="column">
             <FormControl flexDir="column">
-              <FormLabel htmlFor="Username" color={"black"}>
-                Username
-              </FormLabel>
+              <FormLabel htmlFor="Username">Username</FormLabel>
               <Input
                 backgroundColor={"white"}
                 color="black"
@@ -70,9 +68,7 @@ const Signup = () => {
               />
             </FormControl>
             <FormControl flexDir="column">
-              <FormLabel htmlFor="password" color={"black"}>
-                Password
-              </FormLabel>
+              <FormLabel htmlFor="password">Password</FormLabel>
               <Input
                 backgroundColor={"white"}
                 color="black"
