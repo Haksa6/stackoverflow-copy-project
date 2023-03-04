@@ -45,7 +45,29 @@ npm run dev:client
 npm run dev:server
 ```
 
+Remember to change the mongodb address to your own in the server index.js file
+
 ## User manual
+
+Client:
+
+```
+    ├── services                    # all the calls to backend using axios
+    ├── components                  # all the components to structure the app
+    ├── CurrentUserContext.js       # set the context so current user can be called anywhere with useContext
+    ├── i18n.js                     # the language setup file
+    └── setupProxy.js               # set the proxy so we can use different ports for backend and frontend
+
+```
+
+Server:
+
+```
+    ├── middleware                  # the authentication middleware to authenticate the user
+    ├── models                      # mongodb models
+    ├── routes                      # all the calls to backend
+    └── index.js                    # the basic file to start backend also includes the mongodb address
+```
 
 ## Features
 
