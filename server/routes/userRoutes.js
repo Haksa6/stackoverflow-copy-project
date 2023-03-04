@@ -20,7 +20,7 @@ router.post("/register", async (req, res) => {
     console.log(user._id);
     // Create jwt token
     const token = jwt.sign(
-      { _id: user._id, username: username, votedPosts: [], votedComments: [] },
+      { _id: user._id, username: username },
       process.env.JWT_SECRET,
       {
         expiresIn: "2h",
@@ -40,12 +40,11 @@ router.post("/login", async (req, res) => {
     if (!user) res.status(400).send("Invalid Credentials");
     if (await bcrypt.compare(password, user.password)) {
       // Create token
+
       const token = jwt.sign(
         {
           _id: user._id,
           username: username,
-          votedPosts: [],
-          votedComments: [],
         },
         process.env.JWT_SECRET,
         {

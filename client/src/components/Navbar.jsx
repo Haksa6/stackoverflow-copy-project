@@ -12,17 +12,31 @@ import {
   useBreakpointValue,
   Link,
   useColorModeValue,
+  Switch,
+  Text,
 } from "@chakra-ui/react";
 import LightThemeIcon from "./icons/LightThemeIcon";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import DarkLightToggle from "./DarkLightToggle";
 import AuthService from "../services/auth.service";
 import { CurrentUserContext } from "../CurrentUserContext";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
   // Get the user and check if the user is logged in and change the navbar accordingly
   const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser);
+
+  // Handle the language change
+  const { t, i18n } = useTranslation();
+  const handleLanguageChange = (event) => {
+    if (event.target.checked) {
+      i18n.changeLanguage("fi");
+    } else {
+      i18n.changeLanguage("en");
+    }
+  };
+  // IF the language is finnish the switch is checked
+  const isChecked = i18n.language === "fi";
   // Checks the width of the screen
   // md meaning 48em upwards so when the screen is under 48em isDesktop is set to false and the menu icon is shown
   const isDesktop = useBreakpointValue({ base: false, md: "solid" });
@@ -46,11 +60,11 @@ const Navbar = () => {
         <Flex marginLeft="1rem" justify="space-between" flex="1">
           <Box>
             <Link href="/">
-              <Button variant="ghost">Home</Button>
+              <Button variant="ghost">{t("Home")}</Button>
             </Link>
             <Link href="/ask">
               <Button variant="ghost" backgroundColor="#0A95FF" color="white">
-                Ask question
+                {t("Ask question")}
               </Button>
             </Link>
           </Box>
@@ -62,7 +76,7 @@ const Navbar = () => {
                 backgroundColor="red"
                 onClick={AuthService.logout}
               >
-                Logout
+                {t("Logout")}
               </Button>
             ) : (
               <>
@@ -72,7 +86,7 @@ const Navbar = () => {
                     backgroundColor="#BBC0C4"
                     color="white"
                   >
-                    Login
+                    {t("Login")}
                   </Button>
                 </Link>
                 <Link href="/signup">
@@ -81,13 +95,22 @@ const Navbar = () => {
                     backgroundColor="#0A95FF"
                     color="white"
                   >
-                    Sign up
+                    {t("Sign up")}
                   </Button>
                 </Link>
               </>
             )}
 
             <DarkLightToggle />
+            <HStack>
+              <Text>EN</Text>
+              <Switch
+                isChecked={isChecked}
+                id="language-switch"
+                onChange={handleLanguageChange}
+              />
+              <Text>FI</Text>
+            </HStack>
           </HStack>
         </Flex>
       ) : (
@@ -104,17 +127,35 @@ const Navbar = () => {
               />
               <MenuList>
                 <MenuItem as="a" href="/">
-                  Home
+                  {t("Home")}
                 </MenuItem>
                 <MenuItem as="a" href="/ask">
-                  Ask question
+                  {t("Ask question")}
                 </MenuItem>
-                <MenuItem as="a" href="/login">
-                  Login
-                </MenuItem>
-                <MenuItem as="a" href="/signup">
-                  Sign up
-                </MenuItem>
+                {currentUser ? (
+                  <MenuItem color="red" onClick={AuthService.logout}>
+                    {t("Logout")}
+                  </MenuItem>
+                ) : (
+                  <>
+                    <MenuItem as="a" href="/signup">
+                      {t("Sign up")}
+                    </MenuItem>
+                    <MenuItem as="a" href="/Login">
+                      {t("Login")}
+                    </MenuItem>
+                  </>
+                )}
+
+                <HStack marginLeft={"3"}>
+                  <Text>EN</Text>
+                  <Switch
+                    id="language-switch"
+                    isChecked={isChecked}
+                    onChange={handleLanguageChange}
+                  />
+                  <Text>FI</Text>
+                </HStack>
               </MenuList>
             </Menu>
           </Box>

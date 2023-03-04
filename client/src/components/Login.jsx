@@ -10,11 +10,14 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   // Set the values
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const { t } = useTranslation();
+
   // useNavigate to go back to re-route
   const navigate = useNavigate();
 
@@ -40,7 +43,7 @@ const Login = () => {
 
   return (
     <Flex flexDir="column" alignSelf="center">
-      <Heading w="100%">Login</Heading>
+      <Heading w="100%">{t("Login")}</Heading>
 
       <Flex
         justify={"center"}
@@ -56,7 +59,7 @@ const Login = () => {
         <form onSubmit={handleSubmit} id="login-form">
           <Flex flexDir="column">
             <FormControl flexDir="column">
-              <FormLabel htmlFor="Username">Username</FormLabel>
+              <FormLabel htmlFor="Username">{t("Username")}</FormLabel>
               <Input
                 backgroundColor={"white"}
                 color="black"
@@ -70,7 +73,7 @@ const Login = () => {
               />
             </FormControl>
             <FormControl flexDir="column">
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password">{t("Password")}</FormLabel>
               <Input
                 backgroundColor={"white"}
                 color="black"
@@ -84,7 +87,7 @@ const Login = () => {
               />
             </FormControl>
             <Button type="submit" backgroundColor="#0A95FF" marginTop={"1rem"}>
-              Log in
+              {t("Login")}
             </Button>
           </Flex>
         </form>

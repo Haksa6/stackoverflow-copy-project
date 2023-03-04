@@ -4,7 +4,7 @@
 
 - [React](https://reactjs.org/) - React for the frontend
 - [Chakra](https://chakra-ui.com/) - Component library for React, good theme and responsiveness support
-- [MongoDB Atlas](https://www.mongodb.com/atlas/database) - NoSQL database, easy to use
+- [MongoDB](https://www.mongodb.com/atlas/database) - NoSQL database, easy to use
 - [Axios](https://axios-http.com/docs/intro) - Simpler HTTP request library
 - [Framer Motion](https://www.framer.com/motion/) - Animations for React
 
@@ -47,10 +47,13 @@ npm run dev:server
 
 ## Features
 
-| Features                                                      | Max points |
-| ------------------------------------------------------------- | :--------: |
-| Basic features                                                |     25     |
-| Utilization of a frontside framework (React)                  |     5      |
-| Own feature (Light/ Dark theme)                               |     5      |
-| Vote (up or down) posts and comments (only one vote per user) |     3      |
-| **Total score**                                               |   **38**   |
+| Features                                                         | Max points |
+| ---------------------------------------------------------------- | :--------: |
+| Basic features                                                   |     25     |
+| Utilization of a frontside framework (React)                     |     5      |
+| Own feature (Light/ Dark theme)                                  |     5      |
+| Vote (up or down) posts and comments (only one vote per user)    |     3      |
+| Own feature (Clean and responsive UI helps user navigate easier) |     5      |
+| Own feature (404 page makes the website more responsive)         |     1      |
+| Translation of the whole UI in two or more languages             |     2      |
+| **Total score**                                                  |   **46**   |

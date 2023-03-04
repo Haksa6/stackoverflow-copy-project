@@ -15,10 +15,13 @@ import axios from "axios";
 import VoteButtons from "./VoteButtons";
 import PostService from "../services/post.service";
 import { CurrentUserContext } from "../CurrentUserContext";
+import { useTranslation } from "react-i18next";
 
 const SinglePost = () => {
   const [post, setPost] = useState(null);
   const [text, setText] = useState("");
+  const { t } = useTranslation();
+  // Functions to open the edit post modal
 
   // Current user from context
   const currentUser = useContext(CurrentUserContext);
@@ -67,15 +70,23 @@ const SinglePost = () => {
   return (
     <Flex w="100%" flexDir={"column"}>
       <Flex flexDir={"column"} borderBottom="1px solid grey">
-        <Flex alignItems={"center"} justify="space-between" flexWrap={"wrap"}>
+        <Flex alignItems={"center"} justify="space-between">
           <Heading>{post?.title}</Heading>
         </Flex>
-        <HStack fontSize="sm" spacing={9} marginBottom="2">
-          <Text>
-            Created: <Text as="time">{formattedDate}</Text>
+        <Flex
+          flexDir={{ base: "column", sm: "row" }}
+          fontSize="sm"
+          justify="flex-start"
+          marginBottom="2"
+          sx={"100px"}
+        >
+          <Text marginRight="2rem">
+            {t("Created")}: <Text as="time">{formattedDate}</Text>
           </Text>
-          <Text>Posted by: {post?.user.username}</Text>
-        </HStack>
+          <Text marginRight="2rem">
+            {t("Posted by")}: {post?.user.username}
+          </Text>
+        </Flex>
       </Flex>
       <Grid
         marginTop={"6"}
@@ -91,7 +102,7 @@ const SinglePost = () => {
         </GridItem>
       </Grid>
       <Flex marginTop={"4"} flexDir="column">
-        <Text>Write a comment</Text>
+        <Text>{t("Write a comment")}</Text>
         <Textarea
           minH={"150px"}
           marginTop={"2"}
@@ -103,15 +114,16 @@ const SinglePost = () => {
           alignSelf={"flex-start"}
           backgroundColor="#0A95FF"
           marginY={"3.5"}
+          color="white"
         >
-          Submit
+          {t("Submit")}
         </Button>
       </Flex>
 
       {post?.comments.length !== 0 && (
         <Box>
           <Heading marginTop="2.5" fontSize={"xl"}>
-            Comments
+            {t("Comments")}
           </Heading>
 
           {post?.comments.map((comment) => (
@@ -125,7 +137,12 @@ const SinglePost = () => {
                 <VoteButtons isComment={true} post={post} comment={comment} />
               </GridItem>
               <GridItem>
-                <Text>Commented by: {comment.user}</Text>
+                <HStack spacing={10}>
+                  <Text>
+                    {t("Commented by")}: {comment.user}
+                  </Text>
+                </HStack>
+
                 <Text>{comment.text}</Text>
               </GridItem>
             </Grid>

@@ -3,9 +3,11 @@ import { Flex, Text, Box } from "@chakra-ui/react";
 import VoteButtons from "./VoteButtons";
 import { Link } from "react-router-dom";
 import PostService from "../services/post.service";
+import { useTranslation } from "react-i18next";
 
 const Main = () => {
   const [posts, setPosts] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     PostService.getAllPosts().then(
@@ -17,8 +19,9 @@ const Main = () => {
       }
     );
   }, []);
+
   return (
-    <Flex w="100%" flexDir="column">
+    <Flex minW="100%" flexDir="column">
       {posts.map((post) => (
         <Flex
           padding="2"
@@ -29,7 +32,13 @@ const Main = () => {
         >
           <VoteButtons isComment={false} post={post} />
 
-          <Flex flexDir={"column"} justify="space-between" id="post-content">
+          <Flex
+            flexDir={"column"}
+            justify="space-between"
+            id="post-content"
+            maxW="100%"
+            flexWrap={"wrap"}
+          >
             <Box>
               <Link to={`/post/${post._id}`}>
                 <Text
@@ -43,9 +52,14 @@ const Main = () => {
                   {post.title}
                 </Text>
               </Link>
+
               <Text fontSize={"sm"}>{post.codeSnippet}</Text>
             </Box>
-            <Text>Answers: {post.comments.length}</Text>
+            <Flex>
+              <Text marginRight={{ base: "5", sm: "14" }}>
+                {t("Answers")}: {post.comments.length}
+              </Text>
+            </Flex>
           </Flex>
         </Flex>
       ))}
