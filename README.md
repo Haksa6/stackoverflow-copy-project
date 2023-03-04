@@ -1,5 +1,7 @@
 # Stackoverflow project
 
+![screenshot](screenshotstackoverflow.png)
+
 ## Technologies
 
 - [React](https://reactjs.org/) - React for the frontend
@@ -10,7 +12,7 @@
 
 ## Installation
 
-1. Git clone the to an empty folder
+1. Git clone to an empty folder
 
 ```
 git clone https://github.com/Haksa6/stackoverflow-copy-project.git
