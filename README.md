@@ -75,7 +75,7 @@ Server:
 | ---------------------------------------------------------------- | :--------: |
 | Basic features                                                   |     25     |
 | Utilization of a frontside framework (React)                     |     5      |
-| Own feature (Light/ Dark theme)                                  |     5      |
+| Own feature (Light/ Dark theme makes the website customizable)   |     5      |
 | Vote (up or down) posts and comments (only one vote per user)    |     3      |
 | Own feature (Clean and responsive UI helps user navigate easier) |     5      |
 | Own feature (404 page makes the website more responsive)         |     1      |
