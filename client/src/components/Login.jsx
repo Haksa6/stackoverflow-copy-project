@@ -7,6 +7,8 @@ import {
   FormLabel,
   useColorModeValue,
   Heading,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
@@ -16,6 +18,7 @@ const Login = () => {
   // Set the values
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const { t } = useTranslation();
 
   // useNavigate to go back to re-route
@@ -33,6 +36,7 @@ const Login = () => {
           window.location.reload();
         },
         (error) => {
+          setErrorMessage(error.response.data);
           console.log(error);
         }
       );
@@ -43,6 +47,12 @@ const Login = () => {
 
   return (
     <Flex flexDir="column" alignSelf="center">
+      {errorMessage && (
+        <Alert padding={0} w="100%" bg="transparent" status="error">
+          <AlertIcon />
+          {errorMessage}
+        </Alert>
+      )}
       <Heading w="100%">{t("Login")}</Heading>
 
       <Flex

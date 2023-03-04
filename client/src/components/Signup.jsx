@@ -7,6 +7,8 @@ import {
   FormLabel,
   useColorModeValue,
   Heading,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
@@ -15,6 +17,7 @@ import { useTranslation } from "react-i18next";
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -30,6 +33,7 @@ const Signup = () => {
           window.location.reload();
         },
         (error) => {
+          setErrorMessage(error.response.data);
           console.log(error);
         }
       );
@@ -40,6 +44,12 @@ const Signup = () => {
 
   return (
     <Flex flexDir="column" alignSelf="center">
+      {errorMessage && (
+        <Alert padding={0} bg="transparent" status="error">
+          <AlertIcon />
+          {errorMessage}
+        </Alert>
+      )}
       <Heading w="100%">{t("Sign up")}</Heading>
 
       <Flex
