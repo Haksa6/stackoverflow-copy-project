@@ -2,7 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const auth = require("../middleware/auth");
+const auth = require("../utils/auth");
 const { body, validationResult } = require("express-validator");
 
 router.post(
@@ -35,7 +35,6 @@ router.post(
         username,
         password,
       });
-      console.log(user._id);
       // Create jwt token
       const token = jwt.sign(
         { _id: user._id, username: username },

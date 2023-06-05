@@ -9,6 +9,8 @@
 - [MongoDB](https://www.mongodb.com/atlas/database) - NoSQL database, easy to use
 - [Axios](https://axios-http.com/docs/intro) - Simpler HTTP request library
 - [Framer Motion](https://www.framer.com/motion/) - Animations for React
+- [Jest](https://jestjs.io/) - For frontend/backend testing
+- [Supertest](https://www.npmjs.com/package/supertest) - For HTTP testing
 
 ## Installation
 
@@ -24,11 +26,14 @@ git clone https://github.com/Haksa6/stackoverflow-copy-project.git
 npm install
 ```
 
-3. Create a new file called .env in the server folder. Add two new values as such:
+3. Create a new file called .env in the server folder. Add the values as such:
 
 ```
 PORT=5000
 JWT_SECRET=SECRET
+MONGODB_URI=your mongodb address such as mongodb://localhost:27017/
+TESTDB_URI=database for testing such as mongodb://localhost:27017/testdb
+NODE_ENV=test/development depending which database you wanna use you can also set this in the script in package.json
 ```
 
 You can change the values to your own liking
@@ -63,10 +68,12 @@ Client:
 Server:
 
 ```
-    ├── middleware                  # the authentication middleware to authenticate the user
+    ├── utils                       # utils functions used as
     ├── models                      # mongodb models
     ├── routes                      # all the calls to backend
-    └── index.js                    # the basic file to start backend also includes the mongodb address
+    ├── __tests__                   # all the tests
+    ├── app.js                      # all the necessary packages to start backend and mongodb which index.js utilizes
+    └── index.js                    # the basic file to start the backend
 ```
 
 ## Features
