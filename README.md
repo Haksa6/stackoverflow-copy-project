@@ -78,13 +78,12 @@ Server:
 
 ## Features
 
-| Features                                                         | Max points |
-| ---------------------------------------------------------------- | :--------: |
-| Basic features                                                   |     25     |
-| Utilization of a frontside framework (React)                     |     5      |
-| Own feature (Light/ Dark theme makes the website customizable)   |     5      |
-| Vote (up or down) posts and comments (only one vote per user)    |     3      |
-| Own feature (Clean and responsive UI helps user navigate easier) |     5      |
-| Own feature (404 page makes the website more responsive)         |     1      |
-| Translation of the whole UI in two or more languages             |     2      |
-| **Total score**                                                  |   **46**   |
+| Features  
+| ----------------------------------------------------------------
+| Allow user to register, login, post and comment  
+| Utilization of a frontside framework (React)  
+| Light/ Dark theme makes the website customizable  
+| Vote (up or down) posts and comments (only one vote per user)  
+| Clean and responsive UI helps user navigate easier
+| 404 page  
+| Translation of the whole UI in to finnish and english
